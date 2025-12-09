@@ -65,7 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
     
     <!-- 內嵌全域樣式 -->
     <style is:global>
