@@ -1,0 +1,164 @@
+---
+/**
+ * Hero Scrollytelling Component
+ * 首頁 Hero 區塊 - 滾動敘事核心
+ */
+import { Image } from 'astro:assets';
+import perfumeSplash from '../assets/perfume-splash.jpg';
+---
+
+<section id="hero" class="relative h-screen w-full overflow-hidden">
+  <!-- 背景層 - 視差效果 -->
+  <div class="absolute inset-0 bg-gradient-to-b from-neutral-100 via-neutral-50 to-white">
+    <div id="hero-bg" class="absolute inset-0 opacity-0 transition-opacity duration-1000">
+      <Image 
+        src={perfumeSplash}
+        alt="Luxury perfume splash"
+        class="w-full h-full object-cover"
+        loading="eager"
+        quality={90}
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white"></div>
+    </div>
+  </div>
+  
+  <!-- 玻璃流體裝飾 -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div id="glass-orb-1" class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full glass opacity-0"></div>
+    <div id="glass-orb-2" class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full glass opacity-0"></div>
+  </div>
+  
+  <!-- 主要內容 -->
+  <div class="relative h-full flex items-center justify-center">
+    <div class="container-site text-center">
+      <!-- 副標題 -->
+      <div id="hero-subtitle" class="opacity-0 transform translate-y-8">
+        <p class="text-accent mb-4">Niche Perfume Collection</p>
+      </div>
+      
+      <!-- 主標題 -->
+      <div id="hero-title" class="opacity-0 transform translate-y-12">
+        <h1 class="mb-6">
+          <span class="block">The Art of</span>
+          <span class="block text-display italic">Fragrance</span>
+        </h1>
+      </div>
+      
+      <!-- 描述文字 -->
+      <div id="hero-description" class="opacity-0 transform translate-y-16">
+        <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-12 text-neutral-600">
+          探索獨特氣味的無限可能，<br />
+          每一滴都是藝術與感官的完美交融
+        </p>
+      </div>
+      
+      <!-- CTA 按鈕 -->
+      <div id="hero-cta" class="opacity-0 transform translate-y-20">
+        <a 
+          href="#products" 
+          class="inline-block glass px-12 py-4 rounded-full text-accent hover:bg-white/20 transition-all duration-300 hover:scale-105"
+        >
+          探索系列
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 滾動提示 -->
+  <div id="scroll-indicator" class="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0">
+    <div class="flex flex-col items-center gap-2 text-neutral-400">
+      <span class="text-accent text-xs">Scroll to explore</span>
+      <div class="w-6 h-10 border border-current rounded-full flex justify-center pt-2">
+        <div class="w-1 h-3 bg-current rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 玻璃球體動畫 */
+  #glass-orb-1 {
+    animation: float 8s ease-in-out infinite;
+    filter: blur(60px);
+  }
+  
+  #glass-orb-2 {
+    animation: float 10s ease-in-out infinite reverse;
+    filter: blur(40px);
+  }
+  
+  /* 視差效果 */
+  #hero-bg {
+    transform: scale(1.1);
+  }
+</style>
+
+<script>
+  // GSAP-like 動畫邏輯（使用原生 JS 實現）
+  function animateElement(element: HTMLElement, delay: number = 0) {
+    setTimeout(() => {
+      element.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+      element.style.opacity = '1';
+      element.style.transform = 'translateY(0)';
+    }, delay);
+  }
+  
+  // 頁面載入動畫序列
+  window.addEventListener('load', () => {
+    const heroBg = document.getElementById('hero-bg');
+    const heroSubtitle = document.getElementById('hero-subtitle');
+    const heroTitle = document.getElementById('hero-title');
+    const heroDescription = document.getElementById('hero-description');
+    const heroCta = document.getElementById('hero-cta');
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    const glassOrb1 = document.getElementById('glass-orb-1');
+    const glassOrb2 = document.getElementById('glass-orb-2');
+    
+    // 動畫時間軸
+    if (heroBg) {
+      setTimeout(() => {
+        heroBg.style.opacity = '0.6';
+      }, 200);
+    }
+    
+    if (glassOrb1) {
+      setTimeout(() => {
+        glassOrb1.style.opacity = '0.4';
+      }, 400);
+    }
+    
+    if (glassOrb2) {
+      setTimeout(() => {
+        glassOrb2.style.opacity = '0.3';
+      }, 600);
+    }
+    
+    if (heroSubtitle) animateElement(heroSubtitle, 800);
+    if (heroTitle) animateElement(heroTitle, 1000);
+    if (heroDescription) animateElement(heroDescription, 1200);
+    if (heroCta) animateElement(heroCta, 1400);
+    if (scrollIndicator) animateElement(scrollIndicator, 1800);
+  });
+  
+  // 滾動視差效果
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const hero = document.getElementById('hero');
+    const heroBg = document.getElementById('hero-bg');
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    
+    if (hero && heroBg) {
+      const heroHeight = hero.offsetHeight;
+      const scrollProgress = scrolled / heroHeight;
+      
+      // 背景視差
+      heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+      heroBg.style.opacity = String(0.6 - scrollProgress * 0.6);
+      
+      // 隱藏滾動提示
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = String(Math.max(0, 1 - scrollProgress * 2));
+      }
+    }
+  });
+</script>

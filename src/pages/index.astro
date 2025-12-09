@@ -1,134 +1,222 @@
 ---
 /**
- * index.astro - 範例首頁
- * 組裝 Hero、Section 等元件的示範頁面
+ * Homepage - Niche Perfume Website
+ * 首頁 - 小眾沙龍香水網站
  */
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Section from "../components/ui/Section.astro";
-import { siteConfig } from "../config/siteConfig";
-
-// 示範用的 Feature 資料
-const features = [
-	{
-		icon: "🚀",
-		title: "Lorem Ipsum",
-		description:
-			"Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
-	},
-	{
-		icon: "💡",
-		title: "Dolor Sit Amet",
-		description:
-			"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-	},
-	{
-		icon: "🎯",
-		title: "Excepteur Sint",
-		description:
-			"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
-	},
-];
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import HeroScrollytelling from '../components/HeroScrollytelling.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
+import GlassFluidSection from '../components/GlassFluidSection.astro';
 ---
 
-<Layout>
-	<!-- Hero Section -->
-	<Hero
-		title="Lorem Ipsum Dolor Sit Amet Consectetur"
-		subtitle="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-		layout="centered"
-		cta={[
-			{ label: "立即開始", href: "/contact", variant: "primary" },
-			{ label: "了解更多", href: "/about", variant: "secondary" },
-		]}
-	/>
-
-	<!-- Features Section -->
-	<Section background="alt" spacing="lg">
-		<div class="text-center mb-12" data-animate="fade-up">
-			<h2 class="text-h2 mb-4">我們的服務</h2>
-			<p class="text-text-muted text-lg max-w-2xl mx-auto">
-				Excepteur sint occaecat cupidatat non proident, sunt in culpa
-				qui officia deserunt mollit anim.
-			</p>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-			{
-				features.map((feature, index) => (
-					<div
-						class="bg-surface rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow"
-						data-animate="fade-up"
-						data-animate-delay={String(index * 0.1)}
-					>
-						<div class="text-4xl mb-4">{feature.icon}</div>
-						<h3 class="text-h4 mb-3">{feature.title}</h3>
-						<p class="text-text-muted">{feature.description}</p>
-					</div>
-				))
-			}
-		</div>
-	</Section>
-
-	<!-- About Section (Split Layout Demo) -->
-	<Section spacing="lg">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-			<div data-animate="slide-right">
-				<div
-					class="aspect-video bg-gradient-to-br from-primary to-secondary rounded-xl"
-				>
-				</div>
-			</div>
-
-			<div data-animate="slide-left">
-				<h2 class="text-h2 mb-6">關於我們</h2>
-				<p class="text-text-muted text-lg mb-6">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-					do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris.
-				</p>
-				<p class="text-text-muted mb-8">
-					Duis aute irure dolor in reprehenderit in voluptate velit
-					esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-					occaecat cupidatat non proident.
-				</p>
-				<a
-					href="/about"
-					class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
-				>
-					了解更多
-					<svg
-						class="w-5 h-5"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-					</svg>
-				</a>
-			</div>
-		</div>
-	</Section>
-
-	<!-- CTA Section -->
-	<Section background="dark" spacing="lg">
-		<div class="text-center" data-animate="fade-up">
-			<h2 class="text-h2 mb-6">準備開始了嗎？</h2>
-			<p class="text-text-light/70 text-lg mb-8 max-w-2xl mx-auto">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-				eiusmod tempor incididunt.
-			</p>
-			<a
-				href="/contact"
-				class="inline-flex items-center justify-center px-8 py-4 rounded-lg font-semibold bg-surface text-text-main hover:bg-surface-alt transition-colors shadow-lg"
-			>
-				聯絡我們
-			</a>
-		</div>
-	</Section>
+<Layout 
+  title="AROMA - 小眾沙龍香水 | Niche Perfume Collection"
+  description="探索獨特氣味的無限可能，每一滴都是藝術與感官的完美交融。手工調製、天然原料、限量發行。"
+>
+  <!-- 導覽列 -->
+  <Navigation />
+  
+  <!-- Hero 區塊 - Scrollytelling 開場 -->
+  <HeroScrollytelling />
+  
+  <!-- 產品展示區 -->
+  <ProductShowcase />
+  
+  <!-- 關於我們 - 玻璃光影效果 -->
+  <GlassFluidSection />
+  
+  <!-- 服務區塊 -->
+  <section id="services" class="relative py-32 bg-white overflow-hidden">
+    <div class="container-site">
+      <div class="text-center mb-24 scroll-reveal">
+        <p class="text-accent mb-4">Our Services</p>
+        <h2 class="mb-6">專屬服務</h2>
+        <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+          為您打造獨一無二的嗅覺體驗
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <!-- 客製化調香 -->
+        <div class="scroll-reveal group" data-delay="100">
+          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-neutral-100 p-12 h-full transition-all duration-500 hover:scale-105">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-200/30 to-transparent rounded-full blur-2xl"></div>
+            <div class="relative z-10">
+              <div class="text-5xl mb-6">◇</div>
+              <h3 class="text-3xl mb-4">客製化調香</h3>
+              <p class="text-neutral-600 mb-6 leading-relaxed">
+                與調香師一對一諮詢，根據您的個性、喜好與故事，創造專屬於您的香水配方。從前調到後調，每個層次都精心設計。
+              </p>
+              <ul class="space-y-3 text-neutral-600">
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>一對一專業諮詢</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>3-5 次調整確認</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>專屬配方永久保存</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 香水訂閱計畫 -->
+        <div class="scroll-reveal group" data-delay="200">
+          <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-50 to-neutral-100 p-12 h-full transition-all duration-500 hover:scale-105">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-200/30 to-transparent rounded-full blur-2xl"></div>
+            <div class="relative z-10">
+              <div class="text-5xl mb-6">◈</div>
+              <h3 class="text-3xl mb-4">香水訂閱計畫</h3>
+              <p class="text-neutral-600 mb-6 leading-relaxed">
+                每月精選一款限量香水送到府上，讓您持續探索不同的氣味世界。附贈調香師親筆筆記，深入了解每款香水的創作故事。
+              </p>
+              <ul class="space-y-3 text-neutral-600">
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>每月精選限量款</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>調香師創作筆記</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                  <span>會員專屬優惠</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- 聯絡區塊 -->
+  <section id="contact" class="relative py-32 bg-neutral-900 text-white overflow-hidden">
+    <!-- 背景裝飾 -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1.5s;"></div>
+      </div>
+    </div>
+    
+    <div class="container-site relative z-10">
+      <div class="max-w-3xl mx-auto text-center scroll-reveal">
+        <p class="text-accent mb-4">Get in Touch</p>
+        <h2 class="mb-8">開啟您的香氛旅程</h2>
+        <p class="text-xl text-neutral-300 mb-12 leading-relaxed">
+          無論是想了解更多產品資訊、預約客製化服務，<br />
+          或是單純想與我們分享您對香水的熱愛，<br />
+          我們都非常期待與您交流。
+        </p>
+        
+        <!-- 聯絡方式 -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="glass rounded-2xl p-8 backdrop-blur-xl">
+            <div class="text-3xl mb-3">📧</div>
+            <div class="text-accent text-sm mb-2">Email</div>
+            <div class="text-white">hello@aroma.com</div>
+          </div>
+          
+          <div class="glass rounded-2xl p-8 backdrop-blur-xl">
+            <div class="text-3xl mb-3">📞</div>
+            <div class="text-accent text-sm mb-2">Phone</div>
+            <div class="text-white">+886 2 1234 5678</div>
+          </div>
+          
+          <div class="glass rounded-2xl p-8 backdrop-blur-xl">
+            <div class="text-3xl mb-3">📍</div>
+            <div class="text-accent text-sm mb-2">Location</div>
+            <div class="text-white">台北市信義區</div>
+          </div>
+        </div>
+        
+        <!-- CTA 按鈕 -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="mailto:hello@aroma.com" 
+            class="inline-block glass px-10 py-4 rounded-full text-accent hover:bg-white/20 transition-all duration-300 hover:scale-105"
+          >
+            立即聯絡
+          </a>
+          <a 
+            href="#products" 
+            class="inline-block border border-white/20 px-10 py-4 rounded-full text-white hover:bg-white/10 transition-all duration-300 hover:scale-105"
+          >
+            瀏覽產品
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12">
+    <div class="container-site">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-display text-2xl">AROMA</div>
+        
+        <nav class="flex gap-8">
+          <a href="#about" class="text-neutral-400 hover:text-white transition-colors">關於</a>
+          <a href="#products" class="text-neutral-400 hover:text-white transition-colors">產品</a>
+          <a href="#services" class="text-neutral-400 hover:text-white transition-colors">服務</a>
+          <a href="#contact" class="text-neutral-400 hover:text-white transition-colors">聯絡</a>
+        </nav>
+        
+        <div class="text-neutral-500 text-sm">
+          © 2024 AROMA. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
 </Layout>
+
+<style>
+  /* 滾動顯示動畫 */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .scroll-reveal[data-delay="100"].revealed {
+    transition-delay: 0.1s;
+  }
+  
+  .scroll-reveal[data-delay="200"].revealed {
+    transition-delay: 0.2s;
+  }
+</style>
+
+<script>
+  // 滾動顯示動畫
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, observerOptions);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    revealElements.forEach(el => observer.observe(el));
+  });
+</script>

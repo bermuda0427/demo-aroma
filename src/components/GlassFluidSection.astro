@@ -1,0 +1,286 @@
+---
+/**
+ * Glass Fluid Section Component
+ * 玻璃光影與流體效果展示區
+ */
+---
+
+<section id="about" class="relative py-32 overflow-hidden bg-neutral-900 text-white">
+  <!-- 流體背景動畫 -->
+  <div class="absolute inset-0 pointer-events-none">
+    <!-- 流動的玻璃球體 -->
+    <div class="fluid-orb fluid-orb-1"></div>
+    <div class="fluid-orb fluid-orb-2"></div>
+    <div class="fluid-orb fluid-orb-3"></div>
+    
+    <!-- 光影漸層 -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+  
+  <div class="container-site relative z-10">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <!-- 左側：文字內容 -->
+      <div class="scroll-reveal">
+        <p class="text-accent mb-4">About Us</p>
+        <h2 class="mb-8">
+          <span class="block">氣味的</span>
+          <span class="block text-display italic">藝術哲學</span>
+        </h2>
+        <div class="space-y-6 text-lg text-neutral-300">
+          <p>
+            我們相信，香水不僅僅是一種產品，更是一種情感的載體、記憶的鑰匙。每一款香水的誕生，都經歷了無數次的嘗試與調整，只為捕捉那最完美的瞬間。
+          </p>
+          <p>
+            從格拉斯的茉莉花田，到印度的檀香森林，我們走遍世界尋找最純粹的香料。這些天然的寶藏，在調香師的巧手下，化作一瓶瓶充滿靈魂的作品。
+          </p>
+          <p>
+            透明的玻璃瓶身，如同我們對品質的承諾——清澈、純淨、毫無保留。讓每一位使用者都能感受到香水背後的故事與溫度。
+          </p>
+        </div>
+        
+        <!-- 玻璃卡片 -->
+        <div class="mt-12 grid grid-cols-2 gap-4">
+          <div class="glass rounded-2xl p-6 backdrop-blur-xl">
+            <div class="text-3xl font-light mb-2">15+</div>
+            <div class="text-sm text-accent">年調香經驗</div>
+          </div>
+          <div class="glass rounded-2xl p-6 backdrop-blur-xl">
+            <div class="text-3xl font-light mb-2">200+</div>
+            <div class="text-sm text-accent">獨特配方</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 右側：玻璃效果視覺 -->
+      <div class="scroll-reveal relative" data-delay="200">
+        <div class="glass-container">
+          <!-- 主要玻璃卡片 -->
+          <div class="glass-card glass-card-main">
+            <div class="glass-shine"></div>
+            <div class="p-12">
+              <div class="text-6xl mb-6 text-display italic">Essence</div>
+              <div class="h-px w-24 bg-white/30 mb-6"></div>
+              <p class="text-neutral-400">
+                捕捉瞬間，<br />
+                凝結永恆
+              </p>
+            </div>
+          </div>
+          
+          <!-- 浮動玻璃片 -->
+          <div class="glass-card glass-card-float glass-card-float-1">
+            <div class="glass-shine"></div>
+          </div>
+          <div class="glass-card glass-card-float glass-card-float-2">
+            <div class="glass-shine"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 波紋效果 -->
+  <div id="ripple-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+</section>
+
+<style>
+  /* 流體球體 */
+  .fluid-orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    opacity: 0.6;
+  }
+  
+  .fluid-orb-1 {
+    width: 400px;
+    height: 400px;
+    top: 10%;
+    left: 5%;
+    animation: float 15s ease-in-out infinite;
+  }
+  
+  .fluid-orb-2 {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    right: 10%;
+    animation: float 12s ease-in-out infinite reverse;
+    animation-delay: 2s;
+  }
+  
+  .fluid-orb-3 {
+    width: 250px;
+    height: 250px;
+    bottom: 15%;
+    left: 40%;
+    animation: float 18s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+  
+  /* 玻璃容器 */
+  .glass-container {
+    position: relative;
+    height: 500px;
+  }
+  
+  /* 玻璃卡片 */
+  .glass-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glass-card-main {
+    width: 100%;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  
+  .glass-card-main:hover {
+    transform: translate(-50%, -50%) scale(1.02);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* 浮動玻璃片 */
+  .glass-card-float {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .glass-card-float-1 {
+    top: 10%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  .glass-card-float-2 {
+    bottom: 10%;
+    left: 5%;
+    animation: float 10s ease-in-out infinite reverse;
+    animation-delay: 1s;
+    z-index: 1;
+  }
+  
+  /* 玻璃光澤效果 */
+  .glass-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    50% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+  
+  /* 波紋效果 */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: ripple 2s ease-out;
+    pointer-events: none;
+  }
+  
+  @keyframes ripple {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+  }
+  
+  /* 滾動顯示 */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .scroll-reveal[data-delay="200"].revealed {
+    transition-delay: 0.2s;
+  }
+</style>
+
+<script>
+  // 滾動顯示動畫
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, observerOptions);
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    revealElements.forEach(el => observer.observe(el));
+  });
+  
+  // 互動波紋效果
+  const aboutSection = document.getElementById('about');
+  const rippleContainer = document.getElementById('ripple-container');
+  
+  aboutSection?.addEventListener('click', (e) => {
+    if (!rippleContainer) return;
+    
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    
+    const rect = aboutSection.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    
+    rippleContainer.appendChild(ripple);
+    
+    setTimeout(() => {
+      ripple.remove();
+    }, 2000);
+  });
+</script>
