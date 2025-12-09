@@ -64,6 +64,11 @@ const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Global CSS -->
+    <style is:inline>
+      @import "../styles/global.css";
+    </style>
   </head>
 
   <body class="min-h-screen flex flex-col antialiased">
